@@ -1,0 +1,14 @@
+{
+  "builder": "cmake",
+  "kill": "gcompris-qt",
+  "build_args": "-DUBUNTU_TOUCH=ON",
+  "libraries": {
+    "Box2D": {
+      "builder": "qmake",
+      "make_jobs": 1,
+      "src_dir" : "external/qml-box2d",
+      "prebuild": "git submodule update --init --recursive"
+    }
+  }
+}
+

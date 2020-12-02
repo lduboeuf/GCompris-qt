@@ -91,11 +91,17 @@ QString loadTranslation(QSettings &config, QTranslator &translator)
 
 int main(int argc, char *argv[])
 {
+#if defined(UBUNTUTOUCH)
+    // on UT QT_DEVICE_PIXEL_RATIO seems to have no effect
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#else
     // Disable it because we already support HDPI display natively
     qunsetenv("QT_DEVICE_PIXEL_RATIO");
+#endif
+
 
     QApplication app(argc, argv);
-    app.setOrganizationName("KDE");
+    app.setOrganizationName("org.kde.gcompris");
     app.setApplicationName(GCOMPRIS_APPLICATION_NAME);
     app.setOrganizationDomain("kde.org");
     app.setApplicationVersion(ApplicationInfo::GCVersion());
@@ -116,9 +122,17 @@ int main(int argc, char *argv[])
 #endif
 
     // Local scope for config
-    QSettings config(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+#if defined(UBUNTUTOUCH)
+    QSettings config(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) +
                      "/gcompris/" + GCOMPRIS_APPLICATION_NAME + ".conf",
                      QSettings::IniFormat);
+#else
+        QSettings config(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+                         "/gcompris/" + GCOMPRIS_APPLICATION_NAME + ".conf",
+                         QSettings::IniFormat);
+
+#endif
+
 
     // Load translations
     QTranslator translator;
