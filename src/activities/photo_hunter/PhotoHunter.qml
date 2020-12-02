@@ -10,8 +10,7 @@
  */
 import QtQuick 2.6
 import GCompris 1.0
-import QtQuick.Controls 1.5
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2
 
 import "../../core"
 import "photo_hunter.js" as Activity
@@ -158,31 +157,31 @@ ActivityBase {
                 opacity: background.startedHelp ? 1 : 0
                 enabled: background.startedHelp
 
-                style: SliderStyle {
-                        handle: Rectangle {
-                            height: background.vert ? 80 : 70
-                            width: height
-                            radius: width / 2
-                            color: "lightblue"
-                        }
+                handle: Rectangle {
+                    x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
+                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                    height: background.vert ? 80 : 70
+                    width: height
+                    radius: width / 2
+                    color: "lightblue"
+                }
 
-                        groove: Rectangle {
-                            implicitHeight: slider.height
-                            implicitWidth: background.vert ? slider.width * 0.85 : slider.width
-                            radius: height / 2
-                            border.color: "#6699ff"
-                            color: "#99bbff"
+                background: Rectangle {
+                    implicitHeight: slider.height
+                    implicitWidth: background.vert ? slider.width * 0.85 : slider.width
+                    radius: height / 2
+                    border.color: "#6699ff"
+                    color: "#99bbff"
 
-                            Rectangle {
-                                height: parent.height
-                                width: styleData.handlePosition
-                                implicitHeight: 6
-                                implicitWidth: 100
-                                radius: height/2
-                                color: "#4d88ff"
-                            }
-                        }
+                    Rectangle {
+                        height: parent.height
+                        width: slider.visualPosition * parent.width
+                        implicitHeight: 6
+                        implicitWidth: 100
+                        radius: height/2
+                        color: "#4d88ff"
                     }
+                }
 
                 anchors {
                     top: img1.bottom

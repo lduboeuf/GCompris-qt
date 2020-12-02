@@ -8,7 +8,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 import QtQuick 2.6
-import QtQuick.Controls 1.5
+import QtQuick.Controls 2.2
 import GCompris 1.0
 
 import "../../core"
@@ -251,7 +251,7 @@ ActivityBase {
             property int percentage: 0
 
             value: percentage
-            maximumValue: 100
+            to: 100
             visible: !items.isTutorialMode
             anchors {
                 top: parent.top

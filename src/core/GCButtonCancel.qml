@@ -22,7 +22,7 @@ Image {
     anchors.right: parent.right
     anchors.top: parent.top
     smooth: true
-    sourceSize.width: 60 * ApplicationInfo.ratio
+    sourceSize.width: 40 * ApplicationInfo.ratio
     fillMode: Image.PreserveAspectFit
     anchors.margins: 10
 

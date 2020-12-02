@@ -8,8 +8,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 import QtQuick 2.6
-import QtQuick.Controls 1.5
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2
 import GCompris 1.0
 
 /**
@@ -36,21 +35,21 @@ CheckBox {
      */
     property int indicatorImageHeight: 50 * ApplicationInfo.ratio
 
-    style: CheckBoxStyle {
-        spacing: 10
-
-        indicator: Image {
-            sourceSize.height: indicatorImageHeight
-            property string suffix: control.enabled ? ".svg" : "_disabled.svg"
-            source:
-                control.checked ? "qrc:/gcompris/src/core/resource/apply" + suffix :
-                                  "qrc:/gcompris/src/core/resource/cancel" + suffix
-        }
-        label: GCText {
-            fontSize: labelTextFontSize
-            text: control.text
-            wrapMode: Text.WordWrap
-            width: parent.parent.width - 50 * ApplicationInfo.ratio - 10 * 2
-        }
+    spacing: 10
+    indicator: Image {
+        sourceSize.height: indicatorImageHeight
+        property string suffix: checkBox.enabled ? ".svg" : "_disabled.svg"
+        source:
+            checkBox.checked ? "qrc:/gcompris/src/core/resource/apply" + suffix :
+                              "qrc:/gcompris/src/core/resource/cancel" + suffix
     }
+
+    contentItem: GCText {
+        fontSize: labelTextFontSize
+        text: checkBox.text
+        wrapMode: Text.WordWrap
+        width: parent.parent.width - 50 * ApplicationInfo.ratio - 10 * 2
+        leftPadding: checkBox.indicator.width + checkBox.spacing
+    }
+
 }

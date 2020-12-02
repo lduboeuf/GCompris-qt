@@ -47,8 +47,8 @@ Item {
             id: speedSlider
             width: 250 * ApplicationInfo.ratio
             value: speedSetting
-            maximumValue: 10
-            minimumValue: 1
+            to: 10
+            from: 1
             scrollEnabled: false
         }
     }

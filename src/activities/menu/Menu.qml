@@ -14,8 +14,7 @@ import QtGraphicalEffects 1.0
 import "qrc:/gcompris/src/core/core.js" as Core
 
 // For TextField
-import QtQuick.Controls 1.5
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2
 
 /**
  * GCompris' top level menu screen.
@@ -92,7 +91,7 @@ ActivityBase {
     }
 
     Connections {
-        // At the launch of the application, box2d check is performed after we 
+        // At the launch of the application, box2d check is performed after we
         // first initialize the menu. This connection is to refresh
         // automatically the menu at start.
         target: ApplicationInfo
@@ -709,7 +708,7 @@ ActivityBase {
                 id: searchTextField
                 width: parent.width
                 height: parent.height
-                textColor: "black"
+                color: "black"
                 font.pixelSize: height * 0.5
                 font.bold: true
                 opacity: 0.5
@@ -735,13 +734,10 @@ ActivityBase {
                     activity.focus = true;
                 }
 
-                style: TextFieldStyle {
-                    placeholderTextColor: "black"
-                    background: Rectangle {
-                        opacity: 0
-                    }
+                background: Rectangle {
+                    opacity: 0
                 }
-
+                //placeholderTextColor: "black"
                 placeholderText: qsTr("Search specific activities")
                 onTextChanged: searchTimer.restart();
             }

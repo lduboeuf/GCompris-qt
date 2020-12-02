@@ -10,9 +10,10 @@
 
 import QtQuick 2.6
 import GCompris 1.0
-import QtQuick.Controls 1.5
-import QtQuick.Controls.Private 1.0
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2
+import Qt.labs.calendar 1.0
+//import QtQuick.Controls.Private 1.0
+//import QtQuick.Controls.Styles 1.4
 import "../../core"
 import "calendar.js" as Activity
 import "calendar_dataset.js" as Dataset
@@ -93,100 +94,100 @@ ActivityBase {
             frameVisible: true
             focus: !answerChoices.visible
             __locale: Qt.locale(ApplicationInfo.localeShort)
-            style: CalendarStyle {
-                navigationBar: Rectangle {
-                    height: calendar.height * 0.12
-                    color: "#f2f2f2"
-                    
-                    BarButton {
-                        id: previousMonth
-                        height: parent.height * 0.8
-                        width: previousMonth.height
-                        sourceSize.height: previousMonth.height
-                        sourceSize.width: previousMonth.width
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: parent.height * 0.1
-                        source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
-                        rotation: 90
-                        visible: ((calendar.visibleYear + calendar.visibleMonth) > Activity.minRange) ? true : false
-                        onClicked: calendar.showPreviousMonth()
-                    }
-                    GCText {
-                        id: dateText
-                        text: styleData.title
-                        color: "#373737"
-                        horizontalAlignment: Text.AlignHCenter
-                        fontSizeMode: Text.Fit
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: previousMonth.right
-                        anchors.leftMargin: 2
-                        anchors.right: nextMonth.left
-                        anchors.rightMargin: 2
-                    }
-                    BarButton {
-                        id: nextMonth
-                        height: previousMonth.height
-                        width: nextMonth.height
-                        sourceSize.height: nextMonth.height
-                        sourceSize.width: nextMonth.width
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: previousMonth.anchors.leftMargin
-                        source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
-                        rotation: 270
-                        visible: ((calendar.visibleYear + calendar.visibleMonth) < Activity.maxRange) ? true : false
-                        onClicked: calendar.showNextMonth()
-                    }
-                }
-                dayDelegate: Rectangle {
-                    anchors.fill: parent
-                    anchors.leftMargin: (!addExtraMargin || control.weekNumbersVisible) && styleData.index % CalendarUtils.daysInAWeek === 0 ? 0 : -1
-                    anchors.rightMargin: !addExtraMargin && styleData.index % CalendarUtils.daysInAWeek === CalendarUtils.daysInAWeek - 1 ? 0 : -1
-                    anchors.bottomMargin: !addExtraMargin && styleData.index >= CalendarUtils.daysInAWeek * (CalendarUtils.weeksOnACalendarMonth - 1) ? 0 : -1
-                    anchors.topMargin: styleData.selected ? -1 : 0
-                    color: styleData.date !== undefined && styleData.selected ? selectedDateColor : "#F2F2F2"
-                    border.color: "#cec4c4"
-                    radius: 5
-                    property bool addExtraMargin: control.frameVisible && styleData.selected
-                    readonly property color sameMonthDateTextColor: "#373737"
-                    readonly property color selectedDateColor: "#3778d0"
-                    readonly property color selectedDateTextColor: "white"
-                    readonly property color differentMonthDateTextColor: "#bbb"
-                    readonly property color invalidDateColor: "#dddddd"
-                    Label {
-                        id: dayDelegateText
-                        text: styleData.date.getDate()
-                        anchors.centerIn: parent
-                        horizontalAlignment: Text.AlignRight
-                        font.family: GCSingletonFontLoader.fontLoader.name
-                        font.pixelSize: Math.min(parent.height/3, parent.width/3)
-                        color: {
-                            var theColor = invalidDateColor;
-                            if (styleData.valid) {
-                                // Date is within the valid range.
-                                theColor = styleData.visibleMonth ? sameMonthDateTextColor : differentMonthDateTextColor;
-                                if (styleData.selected)
-                                    theColor = selectedDateTextColor;
-                            }
-                            theColor;
-                        }
-                    }
-                }
-                dayOfWeekDelegate: Rectangle {
-                    color: "lightgray"
-                    implicitHeight: Math.round(TextSingleton.implicitHeight * 2.25)
-                    Label {
-                        text: control.__locale.dayName(styleData.dayOfWeek, control.dayOfWeekFormat)
-                        font.family: GCSingletonFontLoader.fontLoader.name
-                        fontSizeMode: Text.Fit
-                        minimumPixelSize: 1
-                        font.pixelSize: items.horizontalLayout ? parent.height * 0.7 : parent.width * 0.2
-                        color: "#373737"
-                        anchors.centerIn: parent
-                    }
-                }
-            }
+//            style: CalendarStyle {
+//                navigationBar: Rectangle {
+//                    height: calendar.height * 0.12
+//                    color: "#f2f2f2"
+//
+//                    BarButton {
+//                        id: previousMonth
+//                        height: parent.height * 0.8
+//                        width: previousMonth.height
+//                        sourceSize.height: previousMonth.height
+//                        sourceSize.width: previousMonth.width
+//                        anchors.verticalCenter: parent.verticalCenter
+//                        anchors.left: parent.left
+//                        anchors.leftMargin: parent.height * 0.1
+//                        source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
+//                        rotation: 90
+//                        visible: ((calendar.visibleYear + calendar.visibleMonth) > Activity.minRange) ? true : false
+//                        onClicked: calendar.showPreviousMonth()
+//                    }
+//                    GCText {
+//                        id: dateText
+//                        text: styleData.title
+//                        color: "#373737"
+//                        horizontalAlignment: Text.AlignHCenter
+//                        fontSizeMode: Text.Fit
+//                        anchors.verticalCenter: parent.verticalCenter
+//                        anchors.left: previousMonth.right
+//                        anchors.leftMargin: 2
+//                        anchors.right: nextMonth.left
+//                        anchors.rightMargin: 2
+//                    }
+//                    BarButton {
+//                        id: nextMonth
+//                        height: previousMonth.height
+//                        width: nextMonth.height
+//                        sourceSize.height: nextMonth.height
+//                        sourceSize.width: nextMonth.width
+//                        anchors.verticalCenter: parent.verticalCenter
+//                        anchors.right: parent.right
+//                        anchors.rightMargin: previousMonth.anchors.leftMargin
+//                        source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
+//                        rotation: 270
+//                        visible: ((calendar.visibleYear + calendar.visibleMonth) < Activity.maxRange) ? true : false
+//                        onClicked: calendar.showNextMonth()
+//                    }
+//                }
+//                dayDelegate: Rectangle {
+//                    anchors.fill: parent
+//                    anchors.leftMargin: (!addExtraMargin || control.weekNumbersVisible) && styleData.index % CalendarUtils.daysInAWeek === 0 ? 0 : -1
+//                    anchors.rightMargin: !addExtraMargin && styleData.index % CalendarUtils.daysInAWeek === CalendarUtils.daysInAWeek - 1 ? 0 : -1
+//                    anchors.bottomMargin: !addExtraMargin && styleData.index >= CalendarUtils.daysInAWeek * (CalendarUtils.weeksOnACalendarMonth - 1) ? 0 : -1
+//                    anchors.topMargin: styleData.selected ? -1 : 0
+//                    color: styleData.date !== undefined && styleData.selected ? selectedDateColor : "#F2F2F2"
+//                    border.color: "#cec4c4"
+//                    radius: 5
+//                    property bool addExtraMargin: control.frameVisible && styleData.selected
+//                    readonly property color sameMonthDateTextColor: "#373737"
+//                    readonly property color selectedDateColor: "#3778d0"
+//                    readonly property color selectedDateTextColor: "white"
+//                    readonly property color differentMonthDateTextColor: "#bbb"
+//                    readonly property color invalidDateColor: "#dddddd"
+//                    Label {
+//                        id: dayDelegateText
+//                        text: styleData.date.getDate()
+//                        anchors.centerIn: parent
+//                        horizontalAlignment: Text.AlignRight
+//                        font.family: GCSingletonFontLoader.fontLoader.name
+//                        font.pixelSize: Math.min(parent.height/3, parent.width/3)
+//                        color: {
+//                            var theColor = invalidDateColor;
+//                            if (styleData.valid) {
+//                                // Date is within the valid range.
+//                                theColor = styleData.visibleMonth ? sameMonthDateTextColor : differentMonthDateTextColor;
+//                                if (styleData.selected)
+//                                    theColor = selectedDateTextColor;
+//                            }
+//                            theColor;
+//                        }
+//                    }
+//                }
+//                dayOfWeekDelegate: Rectangle {
+//                    color: "lightgray"
+//                    implicitHeight: Math.round(TextSingleton.implicitHeight * 2.25)
+//                    Label {
+//                        text: control.__locale.dayName(styleData.dayOfWeek, control.dayOfWeekFormat)
+//                        font.family: GCSingletonFontLoader.fontLoader.name
+//                        fontSizeMode: Text.Fit
+//                        minimumPixelSize: 1
+//                        font.pixelSize: items.horizontalLayout ? parent.height * 0.7 : parent.width * 0.2
+//                        color: "#373737"
+//                        anchors.centerIn: parent
+//                    }
+//                }
+//            }
             onVisibleMonthChanged: {
                 Activity.monthSelected = visibleMonth
                 Activity.daySelected = selectedDate.getDate()
