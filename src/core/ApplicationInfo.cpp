@@ -75,7 +75,8 @@ ApplicationInfo::ApplicationInfo(QObject *parent): QObject(parent)
     qreal height = qMax(rect.width(), rect.height());
     qreal width = qMin(rect.width(), rect.height());
     qreal dpi = qApp->primaryScreen()->logicalDotsPerInch();
-    m_fontRatio = qMax(qreal(1.0), qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth)));
+    //m_fontRatio = qMax(qreal(1.0), qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth)));
+    m_fontRatio = floor(m_ratio*10) /10;
     m_isPortraitMode = m_isMobile ? rect.height() > rect.width() : false;
     m_applicationWidth = m_isMobile ? rect.width() : 1120;
 

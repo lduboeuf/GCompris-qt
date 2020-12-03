@@ -122,5 +122,5 @@ Icon=gcompris.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
-X-Ubuntu-Splash-Color=#111111
-X-Ubuntu-Splash-Image=gcompris2.png
+#X-Ubuntu-Splash-Color=#111111
+#X-Ubuntu-Splash-Image=gcompris2.png

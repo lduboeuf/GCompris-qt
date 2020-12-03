@@ -339,13 +339,11 @@ Window {
 
 
         function itemChangeAction(item) {
-            console.log("kikou transition pushEnter")
             audioVoices.clearQueue()
             audioVoices.stop()
 
             var previousItem = pageView.currentItem;
             if (previousItem && !previousItem.isDialog || item.alwaysStart) {
-                console.log("start ")
                 item.start()
             }
 
@@ -455,133 +453,5 @@ Window {
 
     }
 
-//        delegate: StackViewDelegate {
-//            id: root
-//            function getTransition(properties)
-//            {
-//                console.log("getTransition")
-//                audioVoices.clearQueue()
-//                audioVoices.stop()
-
-//                if(!properties.exitItem.isDialog &&        // if coming from menu and
-//                        !properties.enterItem.isDialog)    // going into an activity then
-//                    playIntroVoice(properties.enterItem.activityInfo.name); // play intro
-
-//                // Don't restart an activity if you click on help
-//                if (!properties.exitItem.isDialog ||       // if coming from menu or
-//                        properties.enterItem.alwaysStart)  // start signal enforced (for special case like transition from config-dialog to editor)
-//                    properties.enterItem.start();
-
-//                if(properties.name === "pushTransition") {
-//                    if(properties.enterItem.isDialog) {
-//                        return pushVTransition
-//                    } else {
-//                        if(properties.enterItem.isMusicalActivity)
-//                            main.isMusicalActivityRunning = true
-//                        return pushHTransition
-//                    }
-//                } else {
-//                    if(properties.exitItem.isDialog) {
-//                        return popVTransition
-//                    } else {
-//                        main.isMusicalActivityRunning = false
-//                        return popHTransition
-//                    }
-
-//                }
-//            }
-
-//            function transitionFinished(properties)
-//            {
-//                console.log("transitionFinished")
-
-//                properties.exitItem.opacity = 1
-//                if(!properties.enterItem.isDialog) {
-//                    properties.exitItem.stop()
-//                }
-//            }
-
-//            property Component pushHTransition: StackViewTransition {
-//                PropertyAnimation {
-//                    target: enterItem
-//                    property: "x"
-//                    from: target.width
-//                    to: 0
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//                PropertyAnimation {
-//                    target: exitItem
-//                    property: "x"
-//                    from: 0
-//                    to: -target.width
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//            }
-
-//            property Component popHTransition: StackViewTransition {
-//                PropertyAnimation {
-//                    target: enterItem
-//                    property: "x"
-//                    from: -target.width
-//                    to: 0
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//                PropertyAnimation {
-//                    target: exitItem
-//                    property: "x"
-//                    from: 0
-//                    to: target.width
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//            }
-
-//            property Component pushVTransition: StackViewTransition {
-//                PropertyAnimation {
-//                    target: enterItem
-//                    property: "y"
-//                    from: -target.height
-//                    to: 0
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//                PropertyAnimation {
-//                    target: exitItem
-//                    property: "y"
-//                    from: 0
-//                    to: target.height
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//            }
-
-//            property Component popVTransition: StackViewTransition {
-//                PropertyAnimation {
-//                    target: enterItem
-//                    property: "y"
-//                    from: target.height
-//                    to: 0
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//                PropertyAnimation {
-//                    target: exitItem
-//                    property: "y"
-//                    from: 0
-//                    to: -target.height
-//                    duration: 500
-//                    easing.type: Easing.OutSine
-//                }
-//            }
-
-//            property Component replaceTransition: pushHTransition
- //       }
-  //  }
-
-
-//   }
     /// @endcond
 }
